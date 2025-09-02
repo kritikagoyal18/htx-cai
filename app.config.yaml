@@ -1,0 +1,27 @@
+application:
+  actions: actions
+  web: web-src
+  runtimeManifest:
+    packages:
+      htx-cai:
+        license: Apache-2.0
+        actions:
+          worker:
+            function: actions/worker/index.js
+            web: 'yes'
+            runtime: nodejs:22
+            inputs:
+              LOG_LEVEL: debug
+            annotations:
+              require-adobe-auth: true
+              final: true
+          publish-events:
+            function: actions/publish-events/index.js
+            web: 'yes'
+            runtime: nodejs:22
+            inputs:
+              LOG_LEVEL: debug
+              apiKey: $SERVICE_API_KEY
+            annotations:
+              require-adobe-auth: true
+              final: true
